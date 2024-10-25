@@ -1,8 +1,6 @@
 #### Collection Volume Data
 
-Collection volume data is in 'data.csv' which has 202 rows and 17 columns. 
-
-For more details please check the paper. 
+Collection volume data is in 'data.csv' which has 202 rows and 17 columns. For more details please check the paper. 
 
 #### Stock Data
 
