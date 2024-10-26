@@ -20,7 +20,7 @@ https://doi.org/10.1287/ijoc.2023.0291.cd
 Below is the BibTex for citing this snapshot of the repository.
 
 ```
-@misc{CacheTest,
+@article{gu2024model,
   author =        {D. Gu, Q. Liu, and X. Zhang},
   publisher =     {INFORMS Journal on Computing},
   title =         {{Model Averaging under Flexible Loss Functions}},
@@ -48,7 +48,7 @@ All detailed results are available in the `results` folder.
 
 ## Data
 
-The datasets used for the numerical study are available in the `data` folder.
+The datasets used for the empirical study are available in the `data` folder.
 
 ## Replicating
 
