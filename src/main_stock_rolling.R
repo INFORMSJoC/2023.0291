@@ -1,4 +1,3 @@
-#####################  导入需要的包  ################
 library(quantreg) 
 library(lpSolve) 
 library(Hmisc)
@@ -10,15 +9,13 @@ library(expectreg)
 library(quadprog)
 source('functions.R')
 
-# 读取数据
 data_sampled<-read.csv('data_sampled.csv',header = TRUE, fileEncoding = "GBK")
 data_sampled<-data_sampled[,-1]
 sales<-data_sampled[,1]
 covariate<-data_sampled[,-1]
 
-# 赋初值
 n.all<-dim(data_sampled)[1]
-M<-ncol(covariate)+1 # 模型个数
+M<-ncol(covariate)+1 
 settings<-list(n=c(60,240),
                tau=c(0.95,0.9,0.5,0.1,0.05))
 settings<-cross2(settings$n,settings$tau,.filter = NULL)
@@ -110,7 +107,7 @@ main_parallel <-function(ii){
     FPEr.EWA[r]<-FPE_qr(tau,y.s,muhat.s%*%w.EWA)
     FPEr.LM[r]<-FPE_qr(tau,y.s,muhat.s%*%w.LM)
     FPEr.AVE[r]<-FPE_qr(tau,y.s,quantile(y,tau)) #historical quantile/expectile returns
-    write(r, file = "test.txt",append = TRUE, sep =" ") # 测试是否正常运行
+    write(r, file = "test.txt",append = TRUE, sep =" ") 
   }
   FPE.JCVMA5<-mean(FPEr.JCVMA5)
   FPE.JMA<-mean(FPEr.JMA)
@@ -224,7 +221,7 @@ main_parallel <-function(ii){
     FPEr.EWA[r]<-FPE_er(tau,y.s,muhat.s%*%w.EWA)
     FPEr.LM[r]<-FPE_er(tau,y.s,muhat.s%*%w.LM)
     FPEr.AVE[r]<-FPE_er(tau,y.s,expectile(y,tau)) #historical quantile/expectile returns
-    write(r, file = "test.txt",append = TRUE, sep =" ") # 测试是否正常运行
+    write(r, file = "test.txt",append = TRUE, sep =" ") 
   }
   FPE.JCVMA5<-mean(FPEr.JCVMA5, na.rm = TRUE)
   FPE.JMA<-mean(FPEr.JMA, na.rm = TRUE)
@@ -254,56 +251,9 @@ FPE_result<-rbind(FPE_result,data.frame(p=2,FPE))
 View(FPE_result)
 write.csv(FPE_result, 'FPE_result.csv',fileEncoding = "GBK")
 FPE_normalized<-cbind(FPE_result[,c(1,2,3)],FPE_result[,-c(1,2,3,10,11,12,13)]/FPE_result$LM)
+FPE_final<-FPE_normalized[,-which(colnames(FPE_normalized)%in%c('JCVMA10','MAP10') )]
 
-# FPE_final<-FPE_normalized[,-which(colnames(FPE_normalized)%in%c('JCVMA10','MAP10') )]
 
-
-######################### latex table  #######################
-latex_table<-function(data){
-  cat("\\begin{table}[htbp]\n")
-  cat("\\centering\n")
-  cat("\\caption{relative FPE of forecast of excess stock returns 
-      in Design I}\n")
-  cat("\\label{table:Rsquare} \n")
-  cat("\\begin{tabular}{lllllllll}\n")
-  cat("\\hline\n")
-  cat("$p$ & $\\tau$  & $n_1$ & JCVMA5  & JMA & SAIC 
-		& SBIC & MAP5  & EWA   \\\\\n")
-  cat("\\hline\n")
-  for (i in 1:nrow(data)) {
-    cat(paste(data[i,1],"& ", data[i,2],"& ", 
-              data[i,3],"& "))
-    first<-order(as.numeric(data[i,-c(1,2,3)]), decreasing = FALSE)[1]
-    second<-order(as.numeric(data[i,-c(1,2,3)]), decreasing = FALSE)[2]
-    third<-order(as.numeric(data[i,-c(1,2,3)]), decreasing = FALSE)[3]
-    for (j in 4:8) {
-      if(j==first+3)
-        cat(sprintf("%.3f", round(data[i,j],3)),"$^{[1]}$ & ", sep="")
-      else if(j==second+3)
-        cat(sprintf("%.3f", round(data[i,j],3)),"$^{[2]}$ & ", sep="")
-      else if(j==third+3)
-        cat(sprintf("%.3f", round(data[i,j],3)),"$^{[3]}$ & ", sep="")
-      else
-        cat(sprintf("%.3f", round(data[i,j],3))," & ",sep="")
-    }
-    for (j in 9) {
-      if(j==first+3)
-        cat(sprintf("%.3f", round(data[i,j],3)),"$^{[1]}$", sep="")
-      else if(j==second+3)
-        cat(sprintf("%.3f", round(data[i,j],3)),"$^{[2]}$", sep="")
-      else if(j==third+3)
-        cat(sprintf("%.3f", round(data[i,j],3)),"$^{[3]}$", sep="")
-      else
-        cat(sprintf("%.3f", round(data[i,j],3))," ",sep="")
-    }
-    cat("\\\\\n")
-  }
-  cat("\\hline\n")
-  cat("\\end{tabular}\n")
-  cat("\\end{table}\n")
-}
-# latex_table(FPE_final)
-latex_table(FPE_normalized)
 
 
 
