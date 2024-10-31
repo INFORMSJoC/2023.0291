@@ -57,3 +57,6 @@ To reproduce each result in the paper, please run corresponding file in `src` . 
 `src/DGP1.R`
 
 See the README.md file in `src` for a detailed description.
+
+Please note that we utilized large-scale computing equipment for multi-core parallel processing. For standard computers without these capabilities, `sfLapply` can be replaced by `lapply` for smaller-scale calculations.
+
