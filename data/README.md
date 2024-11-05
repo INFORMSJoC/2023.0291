@@ -1,6 +1,6 @@
 ### Collection Volume Data
 
-Collection volume data is in 'data.csv' which has 202 rows and 17 columns. For more details please check the paper. 
+Synthetic collection volume data is in 'data.csv'. Due to privacy concerns, we processed the original data to generate synthetic data, which is only used to verify the feasibility of the experiment. For more details, please check the paper. 
 
 ### Stock Data
 
