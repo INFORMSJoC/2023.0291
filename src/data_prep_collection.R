@@ -1,10 +1,7 @@
 library(Hmisc)
 data <- read.csv("data.csv", header=TRUE,
-                             fileEncoding = "GBK",encoding = "GBK" )
-names(data)
-data<-data[,-c(1,2)]
-data<-na.omit(data)
-data<-data[-which(data$揽收量 %in% 0),]
+                 fileEncoding = "GBK",encoding = "GBK" )
+data<-data[,-1]
 y<-data[,1]
 y<-log(y)
 X<-data[,-1]
