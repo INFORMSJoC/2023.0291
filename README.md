@@ -48,7 +48,7 @@ All detailed results are available in the `results` folder.
 
 ## Data
 
-The datasets used for the empirical study are available in the `data` folder.
+A description of the datasets can be found in the `data` folder.
 
 ## Replicating
 
