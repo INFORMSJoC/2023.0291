@@ -4,4 +4,4 @@ Due to privacy reasons, we cannot make this raw data public. For more details, p
 
 ### Stock Data
 
-Stock data is in 'PredictorData2022.xlsx', which is downloaded at https://sites.google.com/view/agoyal145. We would like to express our sincere gratitude to Prof. Goyal for the continuous updates on the dataset.
+Stock data is a widely used open dataset that is continuously updated by Prof. Goyal. It can be downloaded at https://sites.google.com/view/agoyal145. We would like to express our sincere gratitude to Prof. Goyal for the continuous updates on the dataset.
